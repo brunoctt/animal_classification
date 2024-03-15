@@ -94,6 +94,42 @@ A interface criada abre uma janela ao executar o arquivo [main.py](main.py), em 
 
 ![Alt text](docs/selector.png)
 
+## Benchmarking
+
+Para fins de comparação, um segundo modelo foi treinando, seguindo o mesmo pipeline. A arquitetura utilizada foi uma [VGG-16 com *Batch Normalization*](https://pytorch.org/vision/main/models/generated/torchvision.models.vgg16_bn.html#torchvision.models.vgg16_bn), também pré treinada com a ImageNet-1k.
+O treinamento foi realizado com `Learning Rate = 0.00001` e otimizador Adam com `weight_decay = 0.00001` e os demais hiperparâmetros iguais aos do treinamento da ResNet50. A diferença de valores ocorreu por conta da maior propensão que o modelo do VGG16 teve para *overfit*.
+O modelo alcançou uma acurácia de 89.3%. Já o teste com as imagens do diretório [test_folder](test_folder/) resultou em:
+
+| imagens          | classificacao |
+|------------------|---------------|
+| antilope_1.webp  | veado         |
+| asno.jpeg        | asno          |
+| beija-flor.jpeg  | beija-flor    |
+| cachorro_1.jpeg  | cão           |
+| canguru.webp     | canguru       |
+| carro.jpg        | nenhum        |
+| cavalo.jpeg      | cavalo        |
+| cobra_1.webp     | cobra         |
+| cobra_2.jpeg     | cobra         |
+| coiote.webp      | coiote        |
+| gambá.jpg        | javali        |
+| gato.jpg         | leopardo      |
+| gato_2.jpeg      | gato          |
+| leopardo.jpeg    | leopardo      |
+| pizza.jpeg       | ostra         |
+| polvo.jpeg       | polvo         |
+| raposa.jpeg      | coiote        |
+| rinoceronte.jpeg | rinoceronte   |
+| tigre_1.jpeg     | tigre         |
+| tigre_2.jpeg     | tigre         |
+| vaca.jpeg        | vaca          |
+| vale.jpeg        | nenhum        |
+| águia.jpeg       | águia         |
+
+As classificações também tiveram bons resultados, porém com uma taxa de erro maior. Isso pode ser justificado pelo fato da rede ter obtido uma acurácia menor que a ResNet50, como também pela possibilidade de *overfit*, que além de depender da arquitetura do modelo, também pode se dar pelo fato que o dataset utilizado continha uma pequena quantidade de imagens, principalmente quando comparado com os datasets mais comumente utilizados para tarefas de classificação.
+Similarmente, o treinamento foi realizado em um [*notebook* do *kaggle*](https://www.kaggle.com/code/brunotorresteles/animal-classification-vgg/notebook).
+
+
 ## Como utilizar
 
 ### Preparar ambiente
