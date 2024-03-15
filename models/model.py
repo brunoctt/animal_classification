@@ -21,7 +21,7 @@ def load_pre_trained_model() -> nn.Module:
     return model
 
 
-def prepare_for_transfer_learn(model: nn.Module, output_size: int = 90, device="cuda"):
+def prepare_for_transfer_learn(model: nn.Module, output_size: int = 91, device="cuda"):
     """Freezes model's layers and changes the amount of output features of the fully connected layer
     to be the amount of classes in the dataset.
     A dropout layer is also added to avoid overfitting
@@ -29,13 +29,14 @@ def prepare_for_transfer_learn(model: nn.Module, output_size: int = 90, device="
     :param model: Model object
     :param output_size: Amount of classes in dataset, defaults to 90
     """
-    for layer in model.children():
-        for param in layer.parameters():
-            param.requires_grad = False
+    for param in model.parameters():
+        param.requires_grad = False
     
     model.fc = nn.Sequential(
-        torch.nn.Dropout(p=0.2, inplace=True),
-        nn.Linear(in_features=2048, out_features=output_size)
+        nn.Dropout(p=0.2, inplace=True),
+        nn.Linear(in_features=model.fc.in_features, out_features=1024),
+        nn.ReLU(),
+        nn.Linear(in_features=1024, out_features=output_size),
     ).to(device)
 
 

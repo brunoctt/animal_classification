@@ -16,7 +16,7 @@ def main():
     batch_size = 4
     print(device)
     
-    train_dl, test_dl, _ = generate_dataloaders(r"animals\animals", batch_size)
+    train_dl, test_dl, _ = generate_dataloaders("data", batch_size)
     model = load_pre_trained_model().to(device)
     prepare_for_transfer_learn(model)
     loss_fn = CrossEntropyLoss()
