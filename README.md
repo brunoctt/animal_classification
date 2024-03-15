@@ -44,7 +44,9 @@ Já o otimizador foi o [Adam](https://pytorch.org/docs/stable/generated/torch.op
 
 ### Treinamento do Modelo
 
-Como mencionado, o treinamento do modelo foi realizado em 10 épocas, sendo armazenada a perda e a acurácia de treino e de teste para cada época, gerando os seguintes gráficos:
+Como mencionado, o treinamento do modelo foi realizado em 10 épocas. Por motivos de disponibilidade de hardware melhor, o modelo foi treinado em um *notebook* do *kaggle*, que pode ser encontrado neste [link](https://www.kaggle.com/code/brunotorresteles/animal-classification/notebook) ou na versão [local](docs/animal-classification.ipynb).
+
+O treinamento levou aproximadamente 1:09 minutos por época, armazenando a perda e a acurácia de treino e de teste para cada época. Com os dados gerados os seguintes gráficos foram construídos:
 ![Alt text](docs/resnet_loss.png)
 ![Alt text](docs/resnet_acc.png)
 
